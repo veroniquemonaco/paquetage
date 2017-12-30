@@ -1,0 +1,196 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fournisseur", type="string", length=255)
+     */
+    private $fournisseur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     *
+     */
+    private $category;
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTailles()
+    {
+        return $this->tailles;
+    }
+
+    /**
+     * @param mixed $tailles
+     */
+    public function setTailles($tailles)
+    {
+        $this->tailles = $tailles;
+    }
+
+    /**
+     * @var
+     * @ORM\OneToOne(targetEntity="Media")
+     *
+     */
+    private $image;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Taille", inversedBy="products")
+     *
+     */
+    private $tailles;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Product
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set fournisseur
+     *
+     * @param string $fournisseur
+     *
+     * @return Product
+     */
+    public function setFournisseur($fournisseur)
+    {
+        $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * Get fournisseur
+     *
+     * @return string
+     */
+    public function getFournisseur()
+    {
+        return $this->fournisseur;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param string $prix
+     *
+     * @return Product
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return string
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+}

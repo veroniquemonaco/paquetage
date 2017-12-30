@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container container-inscription">
+
+        <h1>Inscription</h1>
+
+        {{ form_start(form) }}
+        <div class="form-login">
+            <div class="group-login">
+
+                {{ form_widget(form.username) }}
+                <span class="highlight"></span><span class="bar"></span>
+                {{ form_label(form.username,'username', {
+                    'label_attr': {'class':'label-login'}
+                }) }}
+                {{ form_errors(form.username) }}
+            </div>
+            <div class="group-login">
+                {{ form_widget(form.email) }}
+                <span class="highlight"></span><span class="bar"></span>
+                {{ form_label(form.email,'email', {
+                    'label_attr': {'class':'label-login'}
+                }) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="group-login">
+
+                {{ form_widget(form.password) }}
+                <span class="highlight"></span><span class="bar"></span>
+                {{ form_label(form.password,' ', {
+                    'label_attr': {'class':'label-login'}
+                }) }}
+                {{ form_errors(form.password) }}
+            </div>
+
+
+            {{ form_end(form) }}
+        </div>
+
+        <form class="form-login">
+            <div class="group-login">
+                <input class="input-login" type="text"><span class="highlight"></span><span class="bar"></span>
+                <label class="label-login">Name</label>
+            </div>
+            <div class="group-login">
+                <input class="input-login" type="email"><span class="highlight"></span><span class="bar"></span>
+                <label class="label-login">Email</label>
+            </div>
+            <button type="button" class="button buttonBlue">Subscribe
+                <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+            </button>
+        </form>
+
+
+    </div>
+
+{% endblock %}

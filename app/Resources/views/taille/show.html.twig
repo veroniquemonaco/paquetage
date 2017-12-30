@@ -1,0 +1,32 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block contentAdmincontent %}
+    <h1>Taille</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ taille.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ taille.name }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('taille_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('taille_edit', { 'id': taille.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

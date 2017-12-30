@@ -1,0 +1,59 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    role_hierarchy:
+        ROLE_ADMIN:
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        main:
+            entity:
+                class:    AppBundle\Entity\User
+                property: username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        security:
+            pattern: ^/security/
+            anonymous: true
+            context: app
+
+        main:
+            pattern:  ^/
+            anonymous: false
+            provider: main
+            context: app
+            form_login:
+                login_path: /security/login
+                check_path: login_check
+                username_parameter: app_bundle_login_type[username]
+                password_parameter: app_bundle_login_type[password]
+            logout:
+                path:   logout
+                target: /
+            remember_me:
+                remember_me_parameter: app_bundle_login_type[remember_me]
+                secret:   '%secret%'
+                lifetime: 31536000
+                path:     /
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            #form_login: ~

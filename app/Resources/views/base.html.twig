@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+    <title>{% block title %}Faites votre package{% endblock %}</title>
+
+    {% block stylesheets %}
+
+        <!-- Fonts -->
+        <script defer src="{{ asset('fonts/fontawesome-all.js') }}"></script>
+
+        <!-- Style -->
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+              integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+        <!-- jQuery -->
+
+    {% endblock %}
+
+
+</head>
+<body>
+<div class="container-fluid bloc">
+    <div class="row d-flex">
+        <div class="logo">
+            <img class="logo" src="{{ asset('images/logoBouygues.png') }}">
+        </div>
+        <div class="arc-bouygues-droit">
+            <img class="arc-bouygues-droit" src="{{ asset('images/arc_droit_bouygues.png') }}">
+        </div>
+    </div>
+    {% block contentAdmin %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block fos_user_content %}{% endblock %}
+    {% block body %}{% endblock %}
+    <div class="arc-bouygues-gauche">
+        <img class="arc-bouygues-gauche" src="{{ asset('images/arc_gauche_bouygues.png') }}">
+    </div>
+</div>
+
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+{% endblock %}
+</body>
+</html>

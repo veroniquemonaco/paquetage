@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Login</h1>
+
+        {{ form_start(form) }}
+        <div class="form-login">
+            <div class="group-login">
+
+                {{ form_widget(form.username) }}
+                <span class="highlight"></span><span class="bar"></span>
+                {{ form_label(form.username,'username', {
+                    'label_attr': {'class':'label-login'}
+                }) }}
+                {{ form_errors(form.username) }}
+            </div>
+
+            <div class="group-login">
+                {{ form_widget(form.password) }}
+                <span class="highlight"></span><span class="bar"></span>
+                {{ form_label(form.password,'password', {
+                    'label_attr': {'class':'label-login'}
+                }) }}
+                {{ form_errors(form.password) }}
+            </div>
+
+            <div class="group-login">
+
+                {{ form_widget(form.submit) }}
+                {{ form_label(form.submit) }}
+                <span class="ripplesCircle"></span></div>
+
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+    {{ errors }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(window, document, undefined).ready(function() {
+
+            $('input').blur(function() {
+                var $this = $(this);
+                if ($this.val())
+                    $this.addClass('used');
+                else
+                    $this.removeClass('used');
+            });
+
+            var $ripples = $('.ripples');
+
+            $ripples.on('click.Ripples', function(e) {
+
+                var $this = $(this);
+                var $offset = $this.parent().offset();
+                var $circle = $this.find('.ripplesCircle');
+
+                var x = e.pageX - $offset.left;
+                var y = e.pageY - $offset.top;
+
+                $circle.css({
+                    top: y + 'px',
+                    left: x + 'px'
+                });
+
+                $this.addClass('is-active');
+
+            });
+
+            $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+                $(this).removeClass('is-active');
+            });
+
+        });
+    </script>
+
+{% endblock %}

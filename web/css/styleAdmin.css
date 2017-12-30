@@ -1,0 +1,32 @@
+.container-admin {
+    background-color: rgba(245,245,245,0.92);
+    height: 85vh;
+    width:97%;
+    padding-left: 0px;
+}
+
+.row-admin {
+    height: 100%;
+}
+
+.admin-content {
+    height: 100%;
+}
+
+.menu-vertical {
+    height: 100%;
+    background-color: black;
+    color: white;
+    padding-top: 50px;
+}
+
+#appbundle_product_tailles {
+    padding: 0 10px 0 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-index-admin {
+    height: 100%;
+    overflow-y: scroll;
+}

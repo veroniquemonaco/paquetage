@@ -1,0 +1,36 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block contentAdmincontent %}
+
+    <div class="container container-index-admin">
+        <h1>Listing produits</h1>
+        <table class="table-bordered table-index">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+
+                <tr>
+                    <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.prix }}</td>
+                    <td>
+                        <a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil"></span>Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-default" href="{{ path('product_new') }}">Créer un nouveau produit</a>
+
+    </div>
+
+{% endblock %}

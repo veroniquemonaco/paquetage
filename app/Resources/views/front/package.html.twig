@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container container-bloc-home">
+
+        <h1>Il est temps de préparer votre paquetage</h1>
+
+
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h5 class="mb-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                           aria-controls="collapseOne">
+                            Pantalons
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block">
+                        {% for produit in produits %}
+                            {% if produit.category.name == 'Pantalons' %}
+                                <div>
+                                    {{ produit.name }}
+                                    <div>taille</div>
+                                    {% for tailles in produit.tailles %}
+                                        {{ tailles.name }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                           aria-expanded="false" aria-controls="collapseTwo">
+                            Vestes
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-block">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Libellé</th>
+                                <th>Taille</th>
+                                <th>Quantité</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for produit in produits %}
+                                {% if produit.category.name == 'Pantalons' %}
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{ produit.name }}</td>
+                                        <td>{{ produit.name }}</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                           aria-expanded="false" aria-controls="collapseThree">
+                            Tee Shirt
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="card-block">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Libellé</th>
+                                <th>Taille</th>
+                                <th>Quantité</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for produit in produits %}
+                                {% if produit.category.name == 'Tee-shirt' %}
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{ produit.name }}</td>
+                                        <td>{% for tailles in produit.tailles %}
+                                                {{ tailles.name }}
+                                            {% endfor %}</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

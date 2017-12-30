@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styleAdmin.css') }}">
+
+{% endblock %}
+
+
+{% block contentAdmin %}
+
+    <div class="container-fluid container-admin">
+        <div class="row row-admin d-flex">
+
+            {% block menuAdmin %}
+
+                <div class="col-3 menu-vertical">
+                    <h1 class="menu-vertical-titre">Menu</h1>
+                    <div class="menu-vertical-liste">
+                        <ul class="menu-vertical-liste-ul">
+                            <li class="menu-vertical-item">
+                                <a href="{{ path('product_index') }}"> Produits </a></li>
+                            <li class="menu-vertical-item">
+                                <a href="{{ path('category_index') }}">Categories</a></li>
+                            <li class="menu-vertical-item">
+                                <a href="{{ path('taille_index') }}">Tailles</a></li>
+                            <li class="menu-vertical-item">Employes</li>
+                        </ul>
+                    </div>
+                </div>
+
+            {% endblock %}
+
+            <div class="col-9">
+                <div class="admin-content">
+                    {% block contentAdmincontent %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

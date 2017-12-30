@@ -1,0 +1,35 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block contentAdmincontent %}
+    <div class="container container-index-admin">
+        <h1>Liste des catégories</h1>
+
+        <table class="table-bordered table-index">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil"></span>Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('category_new') }}">Créer une nouvelle catégorie</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
