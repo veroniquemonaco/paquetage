@@ -13,7 +13,7 @@
                     <h5 class="mb-0">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
                            aria-controls="collapseOne">
-                            Pantalons
+                            Sweat-shirt
                         </a>
                     </h5>
                 </div>
@@ -21,7 +21,7 @@
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                     <div class="card-block">
                         {% for produit in produits %}
-                            {% if produit.category.name == 'Pantalons' %}
+                            {% if produit.category.name == 'Sweat-shirt' %}
                                 <div>
                                     {{ produit.name }}
                                     <div>taille</div>
@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                             {% for produit in produits %}
-                                {% if produit.category.name == 'Pantalons' %}
+                                {% if produit.category.name == 'Pantalon' %}
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>{{ produit.name }}</td>

@@ -17,8 +17,8 @@ class PackageController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm();
-        $form->handleRequest();
+//        $form = $this->createForm();
+//        $form->handleRequest();
 
 
 
