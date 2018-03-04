@@ -24,9 +24,12 @@
                             {% if produit.category.name == 'Sweat-shirt' %}
                                 <div>
                                     {{ produit.name }}
-                                    <div>taille</div>
-                                    {% for tailles in produit.tailles %}
-                                        {{ tailles.name }}
+                                    <ul>
+                                        {% for tailles in produit.tailles %}
+                                        <li>
+                                            {{ tailles.name }}
+                                        </li>
+                                    </ul>
                                     {% endfor %}
                                 </div>
                             {% endif %}
