@@ -105,7 +105,8 @@ class Product
     private $image;
 
     /**
-     * @var@ORM\ManyToMany(targetEntity="Taille", inversedBy="products")
+     * @var
+     * @ORM\ManyToMany(targetEntity="Taille", inversedBy="products")
      *
      */
     private $tailles;
@@ -193,4 +194,3 @@ class Product
         return $this->prix;
     }
 }
-

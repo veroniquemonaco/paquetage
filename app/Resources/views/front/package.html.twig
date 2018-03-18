@@ -8,41 +8,13 @@
 
 
         <div id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="card">
-                <div class="card-header" role="tab" id="headingOne">
-                    <h5 class="mb-0">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
-                           aria-controls="collapseOne">
-                            Sweat-shirt
-                        </a>
-                    </h5>
-                </div>
 
-                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="card-block">
-                        {% for produit in produits %}
-                            {% if produit.category.name == 'Sweat-shirt' %}
-                                <div>
-                                    {{ produit.name }}
-                                    <ul>
-                                        {% for tailles in produit.tailles %}
-                                        <li>
-                                            {{ tailles.name }}
-                                        </li>
-                                    </ul>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-header" role="tab" id="headingTwo">
                     <h5 class="mb-0">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
                            aria-expanded="false" aria-controls="collapseTwo">
-                            Vestes
+                            Pantalons
                         </a>
                     </h5>
                 </div>
@@ -57,6 +29,7 @@
                                 <th>Libellé</th>
                                 <th>Taille</th>
                                 <th>Quantité</th>
+                                <th>OK</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,9 +37,25 @@
                                 {% if produit.category.name == 'Pantalon' %}
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>{{ produit.name }}</td>
-                                        <td>{{ produit.name }}</td>
-                                        <td>@mdo</td>
+                                        <td>
+                                            {{ produit.name }}</td>
+                                        <td>
+                                            <select class="custom-select">
+                                                <option selected>tailles</option>
+                                                {% for taille in produit.tailles %}
+                                                <option value="{{ taille.id }}">{{ taille.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-group" id="quantity">
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                                            </div>
+                                        </td>
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -76,44 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" role="tab" id="headingThree">
-                    <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
-                           aria-expanded="false" aria-controls="collapseThree">
-                            Tee Shirt
-                        </a>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="card-block">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Libellé</th>
-                                <th>Taille</th>
-                                <th>Quantité</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for produit in produits %}
-                                {% if produit.category.name == 'Tee-shirt' %}
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>{{ produit.name }}</td>
-                                        <td>{% for tailles in produit.tailles %}
-                                                {{ tailles.name }}
-                                            {% endfor %}</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     </div>
