@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Cart;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,6 +17,7 @@ class PackageController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+        $cart = new Cart();
 
 //        $form = $this->createForm();
 //        $form->handleRequest();
@@ -26,6 +28,7 @@ class PackageController extends Controller
 
         return $this->render('front/package.html.twig', array(
             'produits' => $produits,
+            'cart' => $cart,
         ));
     }
 
