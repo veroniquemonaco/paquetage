@@ -4,7 +4,7 @@
     background-image: url("../images/backgroundImage2.jpg");
     background-color: rgba(255,0,0,0.8);
     background-size: cover;
-    /*opacity: 0.3;*/
+    opacity: 0.9;
 }
 
 .arc-bouygues-droit {
@@ -16,7 +16,7 @@
 }
 
 .arc-bouygues-droit img {
-    width: 100%;
+    width: 80%;
 }
 
 .arc-bouygues-gauche {
@@ -27,7 +27,7 @@
 }
 
 .arc-bouygues-gauche img {
-    width: 100%;
+    width: 80%;
 }
 
 /*INDEX*/
@@ -42,6 +42,22 @@
     padding: 10px;
 }
 
+/**PACKAGE FRONT**/
+
+.container-bloc-home {
+    background-color: #14b8a0;
+    transform: rotate(-3deg);
+    padding: 50px;
+}
+
+.package-front {
+    transform: rotate(3deg);
+    width:85%;
+    height: 80vh;
+    margin: auto;
+    background-color: #044d43 ;
+    color: white;
+}
 
 
 /** Form login css CodePen Josh Adamous **/
@@ -243,7 +259,7 @@ input:focus ~ .highlight {
 /** HOME PACKAGE **/
 
 .container-bloc-home {
-    background-color: antiquewhite;
+
     height: 91vh;
 }
 
