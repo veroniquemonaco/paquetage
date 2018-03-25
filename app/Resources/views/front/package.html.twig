@@ -38,21 +38,22 @@
                                 <tbody>
                                 {% for produit in produits %}
                                     {% if produit.category.name == 'Pantalon' %}
+
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td class="form-product">
+                                            <td class="form-product" data-productid="{{ produit.id }}">
                                                 {{ produit.name }}</td>
-                                            <td>
+                                            <td class="form-product-taille">
                                                 <select class="custom-select">
-                                                    <option selected>tailles</option>
+                                                    {#<option>tailles</option>#}
                                                     {% for taille in produit.tailles %}
-                                                        <option class="form-product-taille"
+                                                        <option class="form-product-taille-option"
                                                                 value="{{ taille.id }}">{{ taille.name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </td>
-                                            <td>
-                                                <input type="number" class="form-product-qty form-group" id="quantity">
+                                            <td class="form-product-qty">
+                                                <input type="number" class="form-product-qty-value form-group" id="quantity">
                                             </td>
                                             <td>
                                                 <div class="custom-control custom-checkbox">
@@ -62,6 +63,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+
                                     {% endif %}
                                 {% endfor %}
                                 </tbody>
@@ -73,7 +75,6 @@
 
             </div>
         </div>
-
     </div>
 
 
@@ -83,10 +84,27 @@
 {{ parent() }}
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        alert('test');
-       var pdtName = $(".form-product").val();
-       console.log(pdtName);
+    $(function () {
+       var addProduct = {
+           idPdt: null,
+           taille: null,
+           qty: null
+       };
+       var cart = [];
+       $(".form-product-check").change(function () {
+           var isChecked = $(this).is(":checked");
+           if (isChecked) {
+               // console.log($(this).parent().parent().parent().children('td.form-product').data('productid'));
+               addProduct.idPdt = $(this).parent().parent().parent().children('td.form-product').data('productid');
+               addProduct.qty = $(this).parent().parent().parent().children('td.form-product-qty')
+                   .children('input#quantity').val();
+               addProduct.taille = $(this).parent().parent().parent().children('td.form-product-taille')
+                   .children('select.custom-select').val();
+               console.log(addProduct);
+               cart.push(addProduct);
+               console.log(cart);
+           }
+       })
     });
 
 </script>
