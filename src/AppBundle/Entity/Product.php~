@@ -193,4 +193,35 @@ class Product
     {
         return $this->prix;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tailles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add taille
+     *
+     * @param \AppBundle\Entity\Taille $taille
+     *
+     * @return Product
+     */
+    public function addTaille(\AppBundle\Entity\Taille $taille)
+    {
+        $this->tailles[] = $taille;
+
+        return $this;
+    }
+
+    /**
+     * Remove taille
+     *
+     * @param \AppBundle\Entity\Taille $taille
+     */
+    public function removeTaille(\AppBundle\Entity\Taille $taille)
+    {
+        $this->tailles->removeElement($taille);
+    }
 }

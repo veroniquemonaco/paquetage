@@ -84,17 +84,20 @@
 {{ parent() }}
 
 <script type="text/javascript">
-    $(function () {
-       var addProduct = {
+    $(document).ready(function () {
+       let addProduct = {
            idPdt: null,
            taille: null,
            qty: null
        };
-       var cart = [];
+       let cart = [];
+       // productname.each(function(index) {
+       //     var productid = $(this).data('productid');
+       //     array.push(productid);
+       // });
        $(".form-product-check").change(function () {
-           var isChecked = $(this).is(":checked");
+           let isChecked = $(this).is(":checked");
            if (isChecked) {
-               // console.log($(this).parent().parent().parent().children('td.form-product').data('productid'));
                addProduct.idPdt = $(this).parent().parent().parent().children('td.form-product').data('productid');
                addProduct.qty = $(this).parent().parent().parent().children('td.form-product-qty')
                    .children('input#quantity').val();
@@ -103,8 +106,18 @@
                console.log(addProduct);
                cart.push(addProduct);
                console.log(cart);
+           $.ajax({
+               url: '{{ path('package') }}',
+               type: 'POST',
+               dataType: 'json',
+               data: { 'addProduct' : addProduct},
+               success: function (data) {
+                   console.log(data)
+               }
+           })
            }
-       })
+       });
+
     });
 
 </script>
