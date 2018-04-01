@@ -58,5 +58,28 @@ class Cart
     {
         $this->addproducts = new ArrayCollection();
     }
-}
 
+    /**
+     * Add addproduct
+     *
+     * @param \AppBundle\Entity\Addproduct $addproduct
+     *
+     * @return Cart
+     */
+    public function addAddproduct(\AppBundle\Entity\Addproduct $addproduct)
+    {
+        $this->addproducts[] = $addproduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove addproduct
+     *
+     * @param \AppBundle\Entity\Addproduct $addproduct
+     */
+    public function removeAddproduct(\AppBundle\Entity\Addproduct $addproduct)
+    {
+        $this->addproducts->removeElement($addproduct);
+    }
+}
