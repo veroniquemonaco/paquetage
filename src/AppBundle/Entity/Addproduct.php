@@ -41,28 +41,6 @@ class Addproduct
     private $taille;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="addproducts")
-     */
-    private $cart;
-
-    /**
-     * @return mixed
-     */
-    public function getCart()
-    {
-        return $this->cart;
-    }
-
-    /**
-     * @param mixed $cart
-     */
-    public function setCart($cart)
-    {
-        $this->cart = $cart;
-    }
-
-
-    /**
      * @return mixed
      */
     public function getProduct()

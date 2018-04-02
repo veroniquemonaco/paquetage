@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% set totalHT = 0 %}
+{% set totalTTC = 0 %}
+
+{% block body %}
+
+<h5>panier</h5>
+
+    {{ dump(panier) }}
+
+    <div class="container container-bloc-home">
+
+        <div class="package-front">
+
+
+            <h1>Voilà ce que vous avez choisi</h1>
+
+
+            <div id="panier">
+                <h6>Vous avez choisi ces vêtements</h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Qté</th>
+                    </tr>
+                    </thead>
+                    <tbody class="panier--product">
+                    {% for addproduct in panier %}
+
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ addproduct.product.name }}</td>
+                            <td>{{ addproduct.taille.name }}</td>
+                            <td>{{ addproduct.quantity }}</td>
+                        </tr>
+
+                        {%  set totalHT = totalHT + (addproduct.product.prix*addproduct.quantity) %}
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div>
+                    {{ totalHT }}
+                </div>
+
+                <div class="clearfix"></div>
+                <a href="" class="btn btn-success pull-right">Valider</a>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
