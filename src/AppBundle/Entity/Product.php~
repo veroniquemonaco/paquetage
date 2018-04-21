@@ -50,6 +50,25 @@ class Product
     private $category;
 
     /**
+     * @var
+     * @ORM\OneToOne(targetEntity="Media")
+     *
+     */
+    private $image;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Taille", inversedBy="products")
+     *
+     */
+    private $tailles;
+
+    /**
+     * @var
+     */
+    private $role;
+
+    /**
      * @return mixed
      */
     public function getCategory()
@@ -97,19 +116,24 @@ class Product
         $this->tailles = $tailles;
     }
 
-    /**
-     * @var
-     * @ORM\OneToOne(targetEntity="Media")
-     *
-     */
-    private $image;
+
+
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Taille", inversedBy="products")
-     *
+     * @return mixed
      */
-    private $tailles;
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
 
 
     /**

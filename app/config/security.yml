@@ -7,7 +7,9 @@ security:
             cost: 12
 
     role_hierarchy:
-        ROLE_ADMIN:
+        ROLE_MINORANGE: [ROLE_USER]
+        ROLE_COMPAGNON: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded

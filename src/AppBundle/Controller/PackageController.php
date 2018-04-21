@@ -9,6 +9,7 @@ use AppBundle\Entity\Addproduct;
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Taille;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +28,12 @@ class PackageController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $produits = $em->getRepository('AppBundle:Product')->findAll();
+        $roleArray = $this->getUser()->getRoles();
+        $role = $roleArray[0];
+
+        $produits = $em->getRepository('AppBundle:Product')->findBy([
+            'role' => $role
+        ]);
 
         $session = new Session();
 

@@ -21,6 +21,7 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('fournisseur')
             ->add('prix')
+            ->add('role')
             ->add('category', EntityType::class, [
                 'class'=>Category::class,
                 'choice_label'=>'name'
@@ -38,7 +39,9 @@ class ProductType extends AbstractType
                 'attr'=> ['class'=>'selectpicker']
             ])
             ->add('image');
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
