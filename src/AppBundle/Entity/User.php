@@ -56,6 +56,11 @@ class User implements UserInterface
     private $salt;
 
     /**
+     * @var ORM\ManyToOne(targetEntity="Qualification", inversedBy="users")
+     */
+    private $qualification;
+
+    /**
      * @return mixed
      */
     public function getCommandes()
@@ -181,5 +186,36 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add commande
+     *
+     * @param \AppBundle\Entity\Commande $commande
+     *
+     * @return User
+     */
+    public function addCommande(\AppBundle\Entity\Commande $commande)
+    {
+        $this->commandes[] = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Remove commande
+     *
+     * @param \AppBundle\Entity\Commande $commande
+     */
+    public function removeCommande(\AppBundle\Entity\Commande $commande)
+    {
+        $this->commandes->removeElement($commande);
     }
 }

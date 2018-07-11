@@ -56,6 +56,34 @@ class User implements UserInterface
     private $salt;
 
     /**
+     * @var ORM\ManyToOne(targetEntity="Qualification", inversedBy="users")
+     */
+    private $qualification;
+
+    /**
+     * @return mixed
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+
+    /**
+     * @param mixed $commandes
+     */
+    public function setCommandes($commandes)
+    {
+        $this->commandes = $commandes;
+    }
+
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commande", mappedBy="user")
+     */
+    private $commandes;
+
+    /**
      * @return string
      */
     public function getUsername()

@@ -3,8 +3,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Qualification;
 use AppBundle\Entity\Taille;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +23,18 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('fournisseur')
             ->add('prix')
-            ->add('role')
+            ->add('qualifications', EntityType::class, [
+                'class'=>Qualification::class,
+                'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('q')
+                    ->orderBy('q.name','ASC');
+                },
+                'choice_label'=>'name',
+                'expanded'=>true,
+                'required'=>false,
+                'multiple'=>true,
+                'attr'=> ['class'=>'selectpicker']
+            ])
             ->add('category', EntityType::class, [
                 'class'=>Category::class,
                 'choice_label'=>'name'

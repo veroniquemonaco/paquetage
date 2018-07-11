@@ -43,29 +43,6 @@ class Product
     private $prix;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=255)
-     */
-    private $role;
-
-    /**
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param string $role
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    }
-
-    /**
      * @var
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      *
@@ -85,6 +62,12 @@ class Product
      *
      */
     private $tailles;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Qualification", inversedBy="products")
+     */
+    private $qualifications;
 
     /**
      * @return mixed
@@ -245,5 +228,39 @@ class Product
     public function removeTaille(\AppBundle\Entity\Taille $taille)
     {
         $this->tailles->removeElement($taille);
+    }
+
+    /**
+     * Add qualification
+     *
+     * @param \AppBundle\Entity\Qualification $qualification
+     *
+     * @return Product
+     */
+    public function addQualification(\AppBundle\Entity\Qualification $qualification)
+    {
+        $this->qualifications[] = $qualification;
+
+        return $this;
+    }
+
+    /**
+     * Remove qualification
+     *
+     * @param \AppBundle\Entity\Qualification $qualification
+     */
+    public function removeQualification(\AppBundle\Entity\Qualification $qualification)
+    {
+        $this->qualifications->removeElement($qualification);
+    }
+
+    /**
+     * Get qualifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQualifications()
+    {
+        return $this->qualifications;
     }
 }
