@@ -37,7 +37,7 @@
                                 </thead>
                                 <tbody>
                                 {% for produit in produits %}
-                                    {% if produit.category.name == 'Pantalon' %}
+                                    {#{% if produit.category.name == 'Pantalon' %}#}
 
                                         <tr>
                                             <th scope="row">1</th>
@@ -65,7 +65,7 @@
                                             </td>
                                         </tr>
 
-                                    {% endif %}
+                                    {#{% endif %}#}
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -126,8 +126,6 @@
                         .children('input#quantity').val();
                     addProduct.taille = $(this).parent().parent().parent().children('td.form-product-taille')
                         .children('select.custom-select').val();
-                    console.log(addProduct);
-                    console.log(cart);
                     $.ajax({
                         url: '{{ path('package') }}',
                         type: 'POST',
@@ -135,21 +133,45 @@
                         data: {'addProduct': addProduct, 'cart': cart},
                         success: function (data) {
                             console.log(data);
-                            console.log(data['cart']);
-                            let cart = data['cart'];
+                            // console.log(data['cart']);
+                            // let cart = data['cart'];
                             let idPdtCart = data['addPdtId'];
                             let qtyCart = data['addPdtQty'];
                             let tailleCart = data['addPdtTaille'];
                             let libellePdtCart = data['addPdtLibelle'].replace(/"/g, "");
                             let libelleTailleCart = data['addPdtTailleLibelle'].replace(/"/g, "");
                             console.log(libellePdtCart);
-                            $('.panier--product').append("<tr><th scope=\"row\">2</th>\n" +
+                            $('.panier--product').append("<tr class=idpdt-" + idPdtCart +"><th scope=\"row\">2</th>\n" +
                                 "                        <td>" + libellePdtCart + "</td>\n" +
                                 "                        <td>" + libelleTailleCart + "</td>\n" +
                                 "                        <td>" + qtyCart  + "</td>\n" +
                                 "                    </tr>");
                         }
                     })
+                } else {
+                    let lessProduct = {
+                        idPdt: null,
+                        taille: null,
+                        qty: null
+                    };
+                    lessProduct.idPdt = $(this).parent().parent().parent().children('td.form-product').data('productid');
+                    lessProduct.qty = $(this).parent().parent().parent().children('td.form-product-qty')
+                        .children('input#quantity').val();
+                    lessProduct.taille = $(this).parent().parent().parent().children('td.form-product-taille')
+                        .children('select.custom-select').val();
+                    $.ajax({
+                        url: '{{ path('package') }}',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'lessProduct': lessProduct},
+                        success: function (data) {
+                            console.log(data);
+                            let lessPdtId = data['lessPdtId'];
+                            $('.idpdt-'+ lessPdtId + '').html('');
+
+                        }
+                    })
+
                 }
             });
 

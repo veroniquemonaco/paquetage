@@ -16,9 +16,7 @@ class PanierController extends Controller
      */
     public function indexAction()
     {
-
         $session = new Session();
-
         if($session->has('panier'))
             $panier = $session->get('panier');
 

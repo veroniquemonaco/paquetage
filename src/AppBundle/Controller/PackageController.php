@@ -45,31 +45,47 @@ class PackageController extends Controller
             $panier = $session->get('panier');
 
             $data = $request->get('addProduct');
+            $lessData = $request->get('lessProduct');
 
-            $qty = intval($data['qty']);
-            $product = $em->getRepository(Product::class)
-                ->findOneBy(['id' => $data['idPdt']]);
-            $productId = $product->getId();
-            $price = $product->getPrix();
-            $amount = $price*$qty;
-            $taille = $em->getRepository(Taille::class)->findOneBy(['id' => $data['taille']]);
-            $addProduct = new Addproduct();
-            $addProduct->setProduct($product);
-            $addProduct->setTaille($taille);
-            $addProduct->setQuantity($qty);
-            $em->persist($addProduct);
-            $em->flush();
+            if ($data) {
+                $qty = intval($data['qty']);
+                $product = $em->getRepository(Product::class)
+                    ->findOneBy(['id' => $data['idPdt']]);
+                $productId = $product->getId();
+                $price = $product->getPrix();
+                $amount = $price*$qty;
+                $taille = $em->getRepository(Taille::class)->findOneBy(['id' => $data['taille']]);
+                $addProduct = new Addproduct();
+                $addProduct->setProduct($product);
+                $addProduct->setTaille($taille);
+                $addProduct->setQuantity($qty);
+                $em->persist($addProduct);
+                $em->flush();
 
-            $panier[$addProduct->getProduct()->getId()] = $addProduct;
-            $session->set('panier',$panier);
+//                $panier[$addProduct->getProduct()->getId()] = $addProduct;
+                $panier[] = $addProduct;
+                $session->set('panier',$panier);
 
 
-            return new JsonResponse(array("addPdtId" => json_encode($addProduct->getProduct()->getId()),
-                "addPdtTaille" => json_encode($addProduct->getTaille()->getId()),
-                "addPdtQty" => json_encode($addProduct->getQuantity()),
-                "addPdtLibelle" => json_encode($addProduct->getProduct()->getName()),
-                "addPdtTailleLibelle" => json_encode($addProduct->getTaille()->getName()),
+                return new JsonResponse(array("addPdtId" => json_encode($addProduct->getProduct()->getId()),
+                    "addPdtTaille" => json_encode($addProduct->getTaille()->getId()),
+                    "addPdtQty" => json_encode($addProduct->getQuantity()),
+                    "addPdtLibelle" => json_encode($addProduct->getProduct()->getName()),
+                    "addPdtTailleLibelle" => json_encode($addProduct->getTaille()->getName()),
                 ));
+            } elseif ($lessData) {
+                
+                $product = $em->getRepository(Product::class)->findOneBy(['id' => $lessData['idPdt']]);
+
+                unset($panier[$product->getId()]);
+                $session->set('panier',$panier);
+
+                return new JsonResponse(array(
+                   "lessPdtId" => json_encode($product->getId())
+                ));
+            }
+
+
             }
 
 

@@ -43,6 +43,29 @@ class Product
     private $prix;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
+    /**
      * @var
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      *
@@ -62,11 +85,6 @@ class Product
      *
      */
     private $tailles;
-
-    /**
-     * @var
-     */
-    private $role;
 
     /**
      * @return mixed
@@ -115,26 +133,6 @@ class Product
     {
         $this->tailles = $tailles;
     }
-
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param mixed $role
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    }
-
 
     /**
      * Get id
