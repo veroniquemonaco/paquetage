@@ -2,7 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Qualification;
 use AppBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -29,6 +31,10 @@ class RegistrationType extends AbstractType
                 'attr' => [
                     'class' => 'input-login'
                 ]
+            ])
+            ->add('qualification', EntityType::class, [
+                'class'=>Qualification::class,
+                'choice_label'=>'name',
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

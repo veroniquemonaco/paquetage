@@ -177,4 +177,3 @@ class Commande
         return $this->commande;
     }
 }
-

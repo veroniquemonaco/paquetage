@@ -31,9 +31,10 @@ class PackageController extends Controller
         $roleArray = $this->getUser()->getRoles();
         $role = $roleArray[0];
 
-        $produits = $em->getRepository('AppBundle:Product')->findBy([
-            'role' => $role
-        ]);
+        $qualificationId = $this->getUser()->getQualification()->getId();
+
+        $produits = $em->getRepository('AppBundle:Product')->searchBy($qualificationId);
+        dump($produits);
 
         $session = new Session();
 

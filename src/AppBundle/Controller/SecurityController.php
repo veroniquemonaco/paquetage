@@ -33,10 +33,10 @@ class SecurityController extends Controller
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isValid() && $form->isSubmitted()) {
+        if ($form->isValid() && $form->isSubmitted()) {
 
             $em = $this->getDoctrine()->getManager();
-            $password = $encoder->encodePassword($user,$user->getPassword());
+            $password = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password)
                 ->setRoles(['ROLE_USER']);
             $em->persist($user);
@@ -54,9 +54,9 @@ class SecurityController extends Controller
 
     private function authenticateUser(User $user)
     {
-        $token = new UsernamePasswordToken($user,null,'main',$user->getRoles());
+        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
-        $this->get('session')->set('_security_main',serialize($token));
+        $this->get('session')->set('_security_main', serialize($token));
     }
 
     /**
@@ -66,18 +66,21 @@ class SecurityController extends Controller
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('package');
+        } else {
+
+
+            $user = new User();
+            $form = $this->createForm(LoginType::class, $user, ['action' => $this->generateUrl('login_check')]);
+
+            if ($form->isSubmitted() & $form->isValid()) {
+                $this->authenticateUser($user);
+                return $this->redirectToRoute('package');
+            }
+
+            return $this->render('security/login.html.twig',
+                array('form' => $form->createView(), 'errors' => $authenticationUtils->getLastAuthenticationError()));
+
         }
-
-        $user = new User();
-        $form = $this->createForm(LoginType::class, $user, ['action'=>$this->generateUrl('login_check')]);
-
-        if ($form->isValid() & $form->isSubmitted()) {
-            $this->authenticateUser($user);
-            return $this->redirectToRoute('package');
-        }
-
-        return $this->render('security/login.html.twig',
-            array('form'=>$form->createView(), 'errors'=>$authenticationUtils->getLastAuthenticationError()));
 
 
     }

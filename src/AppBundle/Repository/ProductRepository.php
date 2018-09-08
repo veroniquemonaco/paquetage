@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function searchBy($qualificationId){
+
+        $qb = $this->createQueryBuilder('p');
+
+            $qb
+            ->select('p')
+            ->leftJoin('p.qualifications','q')
+            ->where('q.id = :qualificationId')
+            ->setParameter('qualificationId', $qualificationId);
+
+        return $qb->getQuery()->getResult();
+
+
+    }
 }

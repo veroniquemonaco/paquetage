@@ -1,10 +1,14 @@
+body {
+    height:100vh;
+}
+
 .bloc{
     height: 100vh;
     width:100%;
-    background-image: url("../images/backgroundImage2.jpg");
-    background-color: rgba(255,0,0,0.8);
-    background-size: cover;
-    opacity: 0.9;
+    /*background-image: url("../images/backgroundImage2.jpg");*/
+    background-color: rgba(4,77,67,0.7);
+    /*background-size: cover;*/
+    /*opacity: 1;*/
 }
 
 .arc-bouygues-droit {
@@ -48,6 +52,7 @@
     background-color: #14b8a0;
     transform: rotate(-3deg);
     padding: 50px;
+    height:88vh;
 }
 
 .package-front {
@@ -59,6 +64,18 @@
     color: white;
 }
 
+.package--front--title {
+    font-size: 24px;
+}
+
+.package--product--tab {
+    color:black;
+    /*width: 60%;*/
+}
+
+.form-product-qty-value {
+    width:30%;
+}
 
 /** Form login css CodePen Josh Adamous **/
 
@@ -256,12 +273,6 @@ input:focus ~ .highlight {
     width:100%;
 }
 
-/** HOME PACKAGE **/
-
-.container-bloc-home {
-
-    height: 91vh;
-}
 
 
 

@@ -50,13 +50,16 @@ class User implements UserInterface
      */
     private $roles;
 
+
     /**
      * @var string
      */
     private $salt;
 
     /**
-     * @var ORM\ManyToOne(targetEntity="Qualification", inversedBy="users")
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Qualification", inversedBy="users")
      */
     private $qualification;
 
@@ -187,6 +190,7 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
     /**
      * Constructor
      */
@@ -217,5 +221,29 @@ class User implements UserInterface
     public function removeCommande(\AppBundle\Entity\Commande $commande)
     {
         $this->commandes->removeElement($commande);
+    }
+
+    /**
+     * Set qualification
+     *
+     * @param \AppBundle\Entity\Qualification $qualification
+     *
+     * @return User
+     */
+    public function setQualification(\AppBundle\Entity\Qualification $qualification = null)
+    {
+        $this->qualification = $qualification;
+
+        return $this;
+    }
+
+    /**
+     * Get qualification
+     *
+     * @return \AppBundle\Entity\Qualification
+     */
+    public function getQualification()
+    {
+        return $this->qualification;
     }
 }
