@@ -2,6 +2,21 @@
 
 {% block body %}
 
-    {{ dump(commande) }}
+    {#{{ dump(commande.commande) }}#}
+
+   <div class="">
+       <h6>{{ user.firstname }} {{ user.lastname }}</h6>
+       <h6>{{ user.agence }}</h6>
+       <h6>{{ user.direction }}</h6>
+   </div>
+
+    <div class="">
+        <p>{{ commande.date|date('d/m/Y') }}</p>
+        {% for produit in commande.commande %}
+            <p>{{ produit.idpdt }} {{ produit.libelle }} {{ produit.qte }} {{ produit.taille }}</p>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('pdf') }}">télécharger le pdf</a>
 
 {% endblock %}

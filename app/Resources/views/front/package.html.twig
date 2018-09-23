@@ -5,143 +5,65 @@
     <div class="container container-bloc-home">
 
         <div class="package-front">
-
-
-            <h1 class="package--front--title">Il est temps de préparer votre paquetage</h1>
-
-            <div class="container product--list">
-                <div class="row col-8">
-
-
-
-
-
-            <div class="row">
-                <div class="col-1">#</div>
-                <div class="col-5">Libellé</div>
-                <div class="col-2">Taille</div>
-                <div class="col-2">Quantité</div>
-                <div class="col-1">OK</div>
-            </div>
-            {% for produit in produits %}
-                <div class="row">
-                    <div class="col-1">#</div>
-                    <div class="col-5 form-product" data-productid="{{ produit.id }}">{{ produit.name }}</div>
-                    <div class="col-2 form-product-taille">
-                        <select class="custom-select">
-                            {#<option>tailles</option>#}
-                            {% for taille in produit.tailles %}
-                                <option class="form-product-taille-option"
-                                        value="{{ taille.id }}">{{ taille.name }}</option>
-                            {% endfor %}
-                        </select>
+            <h1 class="package--front--title">{{ user.firstname }} {{ user.lastname }}, il est temps de préparer votre
+                paquetage</h1>
+            <div class="">
+                <div class="container product--list">
+                    <div class="row">
+                        <div class="col-1">#</div>
+                        <div class="col-5">Libellé</div>
+                        <div class="col-2">Taille</div>
+                        <div class="col-2">Quantité</div>
+                        <div class="col-1">Ajouter</div>
                     </div>
-                    <div class="col-2 form-product-qty">
-                        <input type="number" class="form-product-qty-value form-group"
-                               id="quantity" placeholder="">
-                    </div>
-                    <div class="col-1 custom-control custom-checkbox">
-                        <input type="checkbox" class="form-product-check" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1"></label>
-                    </div>
-                </div>
-            {% endfor %}
-
-            </div>
-            </div>
-
-            <div class="row">
-
-
-                <div id="accordion" role="tablist" aria-multiselectable="true" class="package--product--tab">
-
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingTwo">
-                            <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                                   aria-expanded="false" aria-controls="collapseTwo">
-                                    Produits
-                                </a>
-                            </h5>
-                        </div>
-
-                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="card-block">
-
-
-
-                                {#<table class="table table-striped">#}
-                                    {#<thead>#}
-                                    {#<tr>#}
-                                        {#<th class="table-row-number">#</th>#}
-                                        {#<th class="table-row-libelle">Libellé</th>#}
-                                        {#<th class="table-row-taille">Taille</th>#}
-                                        {#<th class="table-row-qty">Quantité</th>#}
-                                        {#<th class="table-row-check">OK</th>#}
-                                    {#</tr>#}
-                                    {#</thead>#}
-                                    {#<tbody>#}
-                                    {#{% for produit in produits %}#}
-                                        {#<tr>#}
-                                            {#<th scope="row">1</th>#}
-                                            {#<td class="form-product" data-productid="{{ produit.id }}">#}
-                                                {#{{ produit.name }}</td>#}
-                                            {#<td class="form-product-taille">#}
-                                                {#<select class="custom-select">#}
-                                                    {#<option>tailles</option>#}
-                                                    {#{% for taille in produit.tailles %}#}
-                                                        {#<option class="form-product-taille-option"#}
-                                                                {#value="{{ taille.id }}">{{ taille.name }}</option>#}
-                                                    {#{% endfor %}#}
-                                                {#</select>#}
-                                            {#</td>#}
-                                            {#<td class="form-product-qty">#}
-                                                {#<input type="number" class="form-product-qty-value form-group"#}
-                                                       {#id="quantity" placeholder="0">#}
-                                            {#</td>#}
-                                            {#<td>#}
-                                                {#<div class="custom-control custom-checkbox">#}
-                                                    {#<input type="checkbox" class="form-product-check" id="customCheck1">#}
-                                                    {#<label class="custom-control-label" for="customCheck1"></label>#}
-                                                {#</div>#}
-                                            {#</td>#}
-                                        {#</tr>#}
-                                    {#{% endfor %}#}
-                                    {#</tbody>#}
-                                {#</table>#}
-
+                    {% for produit in produits %}
+                        <div class="row">
+                            <div class="col-1">#</div>
+                            <div class="col-5 form-product" data-productid="{{ produit.id }}">{{ produit.name }}</div>
+                            <div class="col-2 form-product-taille">
+                                <select class="custom-select">
+                                    {#<option>tailles</option>#}
+                                    {% for taille in produit.tailles %}
+                                        <option class="form-product-taille-option"
+                                                value="{{ taille.id }}">{{ taille.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-2 form-product-qty">
+                                <input type="number" class="form-product-qty-value form-group"
+                                       id="quantity" placeholder="0" required>
+                            </div>
+                            <div class="col-1 custom-control custom-checkbox">
+                                <input type="checkbox" class="form-product-check" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1"></label>
                             </div>
                         </div>
+                    {% endfor %}
+                </div>
+                <div class="container product--select">
+                    <div class="row">
+                        <div id="panier" class="">
+                            <h6>Vous avez choisi ces vêtements</h6>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Produit</th>
+                                    <th scope="col">Taille</th>
+                                    <th scope="col">Qté</th>
+                                </tr>
+                                </thead>
+                                <tbody class="panier--product">
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                            <a href="{{ path('panier') }}" class="btn btn-success pull-right">Valider</a>
+                        </div>
                     </div>
-
                 </div>
-
-                <div id="panier" class="">
-                    <h6>Vous avez choisi ces vêtements</h6>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Produit</th>
-                            <th scope="col">Taille</th>
-                            <th scope="col">Qté</th>
-                        </tr>
-                        </thead>
-                        <tbody class="panier--product">
-                        </tbody>
-                    </table>
-
-                    <div class="clearfix"></div>
-                    <a href="{{ path('panier') }}" class="btn btn-success pull-right">Valider</a>
-                </div>
-
             </div>
-
         </div>
-
     </div>
-
-
 {% endblock %}
 
 {% block javascripts %}
@@ -160,36 +82,29 @@
             //     array.push(productid);
             // });
             $(".form-product-check").change(function () {
-
                 let isChecked = $(this).is(":checked");
-                console.log(isChecked);
                 if (isChecked) {
                     addProduct.idPdt = $(this).parent().parent().children('.form-product').data('productid');
                     addProduct.qty = $(this).parent().parent().children('.form-product-qty')
                         .children('input#quantity').val();
                     addProduct.taille = $(this).parent().parent().children('.form-product-taille')
                         .children('select.custom-select').val();
-                    console.log(addProduct);
                     $.ajax({
                         url: '{{ path('package') }}',
                         type: 'POST',
                         dataType: 'json',
                         data: {'addProduct': addProduct, 'cart': cart},
                         success: function (data) {
-                            console.log(data);
-                            // console.log(data['cart']);
-                            // let cart = data['cart'];
                             let idPdtCart = data['addPdtId'];
                             let qtyCart = data['addPdtQty'];
                             let tailleCart = data['addPdtTaille'];
                             let libellePdtCart = data['addPdtLibelle'].replace(/"/g, "");
                             let libelleTailleCart = data['addPdtTailleLibelle'].replace(/"/g, "");
-                            console.log(libellePdtCart);
-                            $('.panier--product').append("<tr class=idpdt-" + idPdtCart + "><th scope=\"row\">2</th>\n" +
-                                "                        <td>" + libellePdtCart + "</td>\n" +
-                                "                        <td>" + libelleTailleCart + "</td>\n" +
-                                "                        <td>" + qtyCart + "</td>\n" +
-                                "                    </tr>");
+                            $('.panier--product').append("<tr class=idpdt-" + idPdtCart + "><th scope=\"row\">2</th>" +
+                                "<td>" + libellePdtCart + "</td>" +
+                                "<td>" + libelleTailleCart + "</td>" +
+                                "<td>" + qtyCart + "</td>\n" +
+                                "</tr>");
                         }
                     })
                 } else {
@@ -198,10 +113,10 @@
                         taille: null,
                         qty: null
                     };
-                    lessProduct.idPdt = $(this).parent().parent().parent().children('td.form-product').data('productid');
-                    lessProduct.qty = $(this).parent().parent().parent().children('td.form-product-qty')
+                    lessProduct.idPdt = $(this).parent().parent().children('.form-product').data('productid');
+                    lessProduct.qty = $(this).parent().parent().children('.form-product-qty')
                         .children('input#quantity').val();
-                    lessProduct.taille = $(this).parent().parent().parent().children('td.form-product-taille')
+                    lessProduct.taille = $(this).parent().parent().children('.form-product-taille')
                         .children('select.custom-select').val();
                     $.ajax({
                         url: '{{ path('package') }}',
@@ -209,17 +124,13 @@
                         dataType: 'json',
                         data: {'lessProduct': lessProduct},
                         success: function (data) {
-                            console.log(data);
                             let lessPdtId = data['lessPdtId'];
                             $('.idpdt-' + lessPdtId + '').html('');
-
                         }
                     })
-
                 }
             });
         });
-
     </script>
 
 {% endblock %}

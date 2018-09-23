@@ -10,16 +10,17 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prix</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for product in products %}
-
                 <tr>
                     <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.prix }}</td>
+                    <td>{{ product.category.name }}</td>
                     <td>
                         <a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-default">
                             <span class="glyphicon glyphicon-pencil"></span>Modifier</a>

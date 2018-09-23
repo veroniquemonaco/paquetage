@@ -16,6 +16,7 @@ class CommandeController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $session = new Session();
         if($session->has('panier'))
@@ -38,7 +39,9 @@ class CommandeController extends Controller
         $em->persist($commande);
         $em->flush();
 
-        return $this->render('front/commande.html.twig', array('commande' => $commande));
+        return $this->render('front/commande.html.twig', array(
+            'commande' => $commande,
+            'user' => $user));
 
     }
 }

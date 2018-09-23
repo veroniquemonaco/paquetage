@@ -1,0 +1,29 @@
+{% extends 'pdf/layout-pdf.html.twig' %}
+
+{% block content %}
+
+    <h4>Récapitulatif de la commande de {{ user.firstname }} {{ user.lastname }}</h4>
+
+    <p>{{ commande.date|date('d/m/Y') }}</p>
+
+    <table>
+        <tr>
+            <td>produit</td>
+            <td>taille</td>
+            <td>qté</td>
+        </tr>
+        {% for produit in commande.commande %}
+        <tr>
+            <td>{{ produit.libelle }}</td>
+            <td>{{ produit.taille }}</td>
+            <td>{{ produit.qte }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+
+
+
+

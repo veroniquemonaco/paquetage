@@ -32,9 +32,102 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="agence", type="string", length=255)
+     */
+    private $agence;
+
+    /**
+     * @return string
+     */
+    public function getAgence()
+    {
+        return $this->agence;
+    }
+
+    /**
+     * @param string $agence
+     */
+    public function setAgence($agence)
+    {
+        $this->agence = $agence;
+    }
+
+    /**
+     * @var string
+     *
+     *  @ORM\Column(name="direction", type="string", length=255)
+     */
+    private $direction;
+
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
+    /**
+     * @param string $direction
+     */
+    public function setDirection($direction)
+    {
+        $this->direction = $direction;
+    }
 
     /**
      * @var string

@@ -22,6 +22,16 @@ class RegistrationType extends AbstractType
                 'class' => 'input-login'
             ]
         ])
+            ->add('firstname', TextType::class , [
+                'attr' => [
+                    'class' => 'input-login'
+                ]
+            ])
+            ->add('lastname', TextType::class , [
+                'attr' => [
+                    'class' => 'input-login'
+                ]
+            ])
             ->add('email', TextType::class , [
                 'attr' => [
                     'class' => 'input-login'
@@ -35,6 +45,16 @@ class RegistrationType extends AbstractType
             ->add('qualification', EntityType::class, [
                 'class'=>Qualification::class,
                 'choice_label'=>'name',
+            ])
+            ->add('agence', TextType::class , [
+                'attr' => [
+                    'class' => 'input-login'
+                ]
+            ])
+            ->add('direction', TextType::class , [
+                'attr' => [
+                    'class' => 'input-login'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

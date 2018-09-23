@@ -4,7 +4,6 @@
 namespace AppBundle\Controller;
 
 
-
 use AppBundle\Entity\Addproduct;
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\Product;
@@ -27,6 +26,7 @@ class PackageController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $roleArray = $this->getUser()->getRoles();
         $role = $roleArray[0];
@@ -38,11 +38,11 @@ class PackageController extends Controller
 
         $session = new Session();
 
-        if(!$session->has('panier')) $session->set('panier',[]);
+        if (!$session->has('panier')) $session->set('panier', []);
 
 
-        if($request->isXmlHttpRequest()){
-            if(!$session->has('panier')) $session->set('panier',[]);
+        if ($request->isXmlHttpRequest()) {
+            if (!$session->has('panier')) $session->set('panier', []);
             $panier = $session->get('panier');
 
             $data = $request->get('addProduct');
@@ -54,7 +54,7 @@ class PackageController extends Controller
                     ->findOneBy(['id' => $data['idPdt']]);
                 $productId = $product->getId();
                 $price = $product->getPrix();
-                $amount = $price*$qty;
+                $amount = $price * $qty;
                 $taille = $em->getRepository(Taille::class)->findOneBy(['id' => $data['taille']]);
                 $addProduct = new Addproduct();
                 $addProduct->setProduct($product);
@@ -65,7 +65,7 @@ class PackageController extends Controller
 
 //                $panier[$addProduct->getProduct()->getId()] = $addProduct;
                 $panier[] = $addProduct;
-                $session->set('panier',$panier);
+                $session->set('panier', $panier);
 
 
                 return new JsonResponse(array("addPdtId" => json_encode($addProduct->getProduct()->getId()),
@@ -75,26 +75,22 @@ class PackageController extends Controller
                     "addPdtTailleLibelle" => json_encode($addProduct->getTaille()->getName()),
                 ));
             } elseif ($lessData) {
-                
+
                 $product = $em->getRepository(Product::class)->findOneBy(['id' => $lessData['idPdt']]);
 
                 unset($panier[$product->getId()]);
-                $session->set('panier',$panier);
+                $session->set('panier', $panier);
 
                 return new JsonResponse(array(
-                   "lessPdtId" => json_encode($product->getId())
+                    "lessPdtId" => json_encode($product->getId())
                 ));
             }
-
-
-            }
-
-
-            return $this->render('front/package.html.twig', array(
-                'produits' => $produits
-            ));
+        }
+        return $this->render('front/package.html.twig', array(
+            'produits' => $produits,
+            'user' => $user
+        ));
     }
-
 
 
 }
