@@ -51,83 +51,19 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @var string
+     * @var
      *
-     * @ORM\Column(name="agence", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Agence", inversedBy="users")
      */
     private $agence;
 
     /**
-     * @return string
-     */
-    public function getAgence()
-    {
-        return $this->agence;
-    }
-
-    /**
-     * @param string $agence
-     */
-    public function setAgence($agence)
-    {
-        $this->agence = $agence;
-    }
-
-    /**
-     * @var string
+     * @var
      *
-     *  @ORM\Column(name="direction", type="string", length=255)
+     *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\Direction", inversedBy="users")
      */
     private $direction;
 
-    /**
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * @param string $firstname
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param string $lastname
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getDirection()
-    {
-        return $this->direction;
-    }
-
-    /**
-     * @param string $direction
-     */
-    public function setDirection($direction)
-    {
-        $this->direction = $direction;
-    }
 
     /**
      * @var string
@@ -155,6 +91,72 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity="Qualification", inversedBy="users")
      */
     private $qualification;
+
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAgence()
+    {
+        return $this->agence;
+    }
+
+    /**
+     * @param string $agence
+     */
+    public function setAgence($agence)
+    {
+        $this->agence = $agence;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
+    /**
+     * @param string $direction
+     */
+    public function setDirection($direction)
+    {
+        $this->direction = $direction;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+
 
     /**
      * @return mixed

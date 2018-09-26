@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class CommandeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function searchBy($agence)
+    {
+
+        $qb = $this->createQueryBuilder('c')
+            ->leftJoin('c.user','u')
+            ->leftJoin('u.agence','a')
+            ->andWhere('a.name = :agence')
+            ->setParameter('agence',$agence);
+
+        return $qb->getQuery()->getResult();
+    }
 }

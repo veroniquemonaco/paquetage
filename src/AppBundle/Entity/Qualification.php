@@ -31,7 +31,7 @@ class Qualification
     /**
      * @var
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Qualification", mappedBy="qualification")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="qualification")
      */
     private $users;
 

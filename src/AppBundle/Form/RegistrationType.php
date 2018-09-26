@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Agence;
+use AppBundle\Entity\Direction;
 use AppBundle\Entity\Qualification;
 use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -46,15 +48,13 @@ class RegistrationType extends AbstractType
                 'class'=>Qualification::class,
                 'choice_label'=>'name',
             ])
-            ->add('agence', TextType::class , [
-                'attr' => [
-                    'class' => 'input-login'
-                ]
+            ->add('agence', EntityType::class, [
+                'class'=>Agence::class,
+                'choice_label'=>'name'
             ])
-            ->add('direction', TextType::class , [
-                'attr' => [
-                    'class' => 'input-login'
-                ]
+            ->add('direction', EntityType::class, [
+                'class'=>Direction::class,
+                'choice_label'=>'name'
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
