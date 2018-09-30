@@ -73,7 +73,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var string
+     * @var
      *
      * @ORM\Column(name="roles", type="array")
      */
@@ -236,7 +236,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getRoles()
     {
@@ -244,14 +244,13 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $roles
-     * @return User
+     * @param mixed $roles
      */
     public function setRoles($roles)
     {
         $this->roles = $roles;
-        return $this;
     }
+
 
     /**
      * @return string

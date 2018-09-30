@@ -28,6 +28,7 @@ class CommandeController extends Controller
             $array[$index]['libelle'] = $addproduct->getProduct()->getName();
             $array[$index]['qte'] = $addproduct->getQuantity();
             $array[$index]['taille'] = $addproduct->getTaille()->getName();
+            $array[$index]['prix'] = $addproduct->getPrice();
         }
         $commande = new Commande();
         $commande->setDate(new \DateTime());

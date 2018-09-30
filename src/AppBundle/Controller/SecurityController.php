@@ -67,8 +67,6 @@ class SecurityController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('package');
         } else {
-
-
             $user = new User();
             $form = $this->createForm(LoginType::class, $user, ['action' => $this->generateUrl('login_check')]);
 

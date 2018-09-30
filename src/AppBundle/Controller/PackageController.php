@@ -60,6 +60,7 @@ class PackageController extends Controller
                 $addProduct->setProduct($product);
                 $addProduct->setTaille($taille);
                 $addProduct->setQuantity($qty);
+                $addProduct->setPrice($price);
                 $em->persist($addProduct);
                 $em->flush();
 
@@ -73,6 +74,7 @@ class PackageController extends Controller
                     "addPdtQty" => json_encode($addProduct->getQuantity()),
                     "addPdtLibelle" => json_encode($addProduct->getProduct()->getName()),
                     "addPdtTailleLibelle" => json_encode($addProduct->getTaille()->getName()),
+                    "addPdtPrix" => json_encode($addProduct->getPrice()),
                 ));
             } elseif ($lessData) {
 

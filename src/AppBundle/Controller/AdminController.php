@@ -6,10 +6,12 @@ use AppBundle\Entity\Agence;
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\User;
 use AppBundle\Form\ExportCommandesType;
+use AppBundle\Form\UserCreationType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class AdminController extends Controller
@@ -23,21 +25,11 @@ class AdminController extends Controller
 
         $commandes = $em->getRepository(Commande::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
-        $commandesSearch='';
+        $commandesSearch = '';
+        $syntheseCommandeSearch = [];
 
         $form = $this->createForm(ExportCommandesType::class);
         $form->handleRequest($request);
-
-//        $form = $this->createFormBuilder()
-//            ->add('agence', EntityType::class, [
-//                'class'=>Agence::class,
-//                'choice_label'=>'name'
-//            ])
-//            ->add('user', EntityType::class, [
-//                'class'=>User::class,
-//                'choice_label'=>'username'
-//            ])
-//            ->getForm();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -46,14 +38,83 @@ class AdminController extends Controller
 
             $commandesSearch = $em->getRepository(Commande::class)->searchBy($agence);
             dump($commandesSearch);
+
+
+            $test=[];
+
+            foreach ($commandesSearch as $commande) {
+                $test[]= $commande->getCommande();
+            }
+
+            foreach ($test as $item) {
+                foreach ($item as $index=>$value) {
+                    $test2[]=$value;
+                }
+            }
+
+            $test3=[];
+            foreach ($test2 as $value) {
+                $test3[]=$value;
+            }
+            dump($test3);
+
+            for ($i=1; $i<count($test3)+1;$i++) {
+                if ($test3[$i]['idpdt'] == $test3[$i-1]['idpdt']) {
+                    $test3[$i]['qte']=$test3[$i]['qte']+$test3[$i-1]['qte'];
+                }
+            }
+
+
         }
 
         return $this->render('admin/exports.html.twig', array(
             'commandes' => $commandes,
             'form' => $form->createView(),
-            'users'=>$users,
-            'commandesSearch'=>$commandesSearch,
-            'data'=>$agence
+            'users' => $users,
+            'commandesSearch' => $commandesSearch,
         ));
     }
+
+
+    /**
+     * @Route("/admin/createuser", name="create_user")
+     */
+    public function createEmployeAction(UserPasswordEncoderInterface $encoder, Request $request)
+    {
+        $user = new User();
+        $username = '';
+        $email = '';
+        $form = $this->createForm(UserCreationType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $username = $user->getFirstname() . $user->getLastname();
+            $email = $username . '@test.fr';
+            $plainPassword = 'motdepasse';
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encoded)
+                ->setRoles(['ROLE_USER']);
+            $user->setUsername($username);
+            $user->setEmail($email);
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $this->render('admin/createuser.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @Route("admin/users/index", name="index_user")
+     */
+    public function usersIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findAll();
+
+        return $this->render('admin/usersindex.html.twig', array(
+            'users' => $users
+        ));
+    }
+
 }

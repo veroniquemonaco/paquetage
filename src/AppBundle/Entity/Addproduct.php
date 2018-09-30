@@ -29,6 +29,29 @@ class Addproduct
     private $quantity;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product")
      */
