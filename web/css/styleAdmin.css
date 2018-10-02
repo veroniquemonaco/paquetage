@@ -10,7 +10,8 @@
 }
 
 .admin-content {
-    height: 100%;
+    height: 85vh;
+    overflow: scroll;
 }
 
 .menu-vertical {

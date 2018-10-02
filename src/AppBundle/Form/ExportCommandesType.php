@@ -7,6 +7,7 @@ use AppBundle\Entity\Commande;
 use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,9 +18,11 @@ class ExportCommandesType extends AbstractType
     {
 
         $builder
-            ->add('user', EntityType::class, [
-                'class'=>User::class,
-                'choice_label'=>'username',
+            ->add('Recherche', SearchType::class, [
+                'required' => false,
+                'attr'     => ['placeholder'  => 'Entrez un nom...',
+                    'autocomplete' => 'off',
+                ],
             ])
             ->add('agence', EntityType::class, [
                 'class'=>Agence::class,
