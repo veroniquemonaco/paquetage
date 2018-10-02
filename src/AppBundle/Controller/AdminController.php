@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Agence;
 use AppBundle\Entity\Commande;
+use AppBundle\Entity\ProductPackage;
 use AppBundle\Entity\User;
 use AppBundle\Form\ExportCommandesType;
 use AppBundle\Form\UserCreationType;
@@ -26,7 +27,8 @@ class AdminController extends Controller
         $commandes = $em->getRepository(Commande::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
         $commandesSearch = '';
-        $syntheseCommandeSearch = [];
+        $array = [];
+        $agence='';
 
         $form = $this->createForm(ExportCommandesType::class);
         $form->handleRequest($request);
@@ -34,37 +36,26 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $agence = $data['agence']->getName();
-            dump($data);
 
             $commandesSearch = $em->getRepository(Commande::class)->searchBy($agence);
-            dump($commandesSearch);
 
+            $orderproductsSearch = $em->getRepository(ProductPackage::class)->searchOrderLineBy($agence);
 
-            $test=[];
-
-            foreach ($commandesSearch as $commande) {
-                $test[]= $commande->getCommande();
-            }
-
-            foreach ($test as $item) {
-                foreach ($item as $index=>$value) {
-                    $test2[]=$value;
+            $tab = [];
+            $array = [];
+            foreach ($orderproductsSearch as $orderline) {
+                $idpdtunique = $orderline->getIdpdtUnique();
+                $qty = $orderline->getQty();
+                $array[$idpdtunique]['libelle'] = $orderline->getLibellePdt();
+                $array[$idpdtunique]['taille'] = $orderline->getTaille();
+                if (!array_key_exists($idpdtunique, $tab)) {
+                    $tab[$idpdtunique] = $qty;
+                    $array[$idpdtunique]['qty'] = $tab[$idpdtunique];
+                } else {
+                    $tab[$idpdtunique] = $tab[$idpdtunique] + $qty;
+                    $array[$idpdtunique]['qty'] = $tab[$idpdtunique];
                 }
             }
-
-            $test3=[];
-            foreach ($test2 as $value) {
-                $test3[]=$value;
-            }
-            dump($test3);
-
-            for ($i=1; $i<count($test3);$i++) {
-                if ($test3[$i]['idpdt'] === $test3[$i-1]['idpdt']) {
-                    $test3[$i]['qte']=$test3[$i]['qte']+$test3[$i-1]['qte'];
-                }
-            }
-
-            dump($test3);
         }
 
         return $this->render('admin/exports.html.twig', array(
@@ -72,6 +63,8 @@ class AdminController extends Controller
             'form' => $form->createView(),
             'users' => $users,
             'commandesSearch' => $commandesSearch,
+            'syntheseCommande' => $array,
+            'agence' => $agence,
         ));
     }
 
@@ -82,8 +75,6 @@ class AdminController extends Controller
     public function createEmployeAction(UserPasswordEncoderInterface $encoder, Request $request)
     {
         $user = new User();
-        $username = '';
-        $email = '';
         $form = $this->createForm(UserCreationType::class, $user);
         $form->handleRequest($request);
 

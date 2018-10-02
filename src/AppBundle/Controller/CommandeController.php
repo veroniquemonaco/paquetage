@@ -31,12 +31,14 @@ class CommandeController extends Controller
             $array[$index]['taille'] = $addproduct->getTaille()->getName();
             $array[$index]['prix'] = $addproduct->getPrice();
             $orderline = new ProductPackage();
+            $idpdtUnique = $addproduct->getProduct()->getId().$addproduct->getTaille()->getName();
             $orderline->setUser($user);
             $orderline->setIdpdt($addproduct->getProduct()->getId());
             $orderline->setLibellePdt($addproduct->getProduct()->getName());
             $orderline->setTaille($addproduct->getTaille()->getName());
             $orderline->setQty($addproduct->getQuantity());
             $orderline->setYearPaquetage(2018);
+            $orderline->setIdpdtUnique($idpdtUnique);
             $em->persist($orderline);
             $em->flush();
         }

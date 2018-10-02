@@ -3,11 +3,44 @@
 
 {% block contentAdmincontent %}
 
+    <h2>Export des commandes par agence</h2>
+
     {{ form(form) }}
+
+    <h4>liste des produits commandés pour l'agence de {{ agence }}</h4>
+    <div class="container">
+
+
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr class="row">
+                    <th class="col-1">#</th>
+                    <th class="col-7">libellé</th>
+                    <th class="col-2">taille</th>
+                    <th class="col-2">quantité</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pdt in syntheseCommande %}
+                    <tr class="row">
+                        <th class="col-1">{{ loop.index }}</th>
+                        <td class="col-7">{{ pdt.libelle }}</td>
+                        <td class="col-2">{{ pdt.taille }}</td>
+                        <td class="col-2">{{ pdt.qty }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     {{ dump(commandes) }}
     {{ dump(users) }}
 
 
     {{ dump(commandesSearch) }}
+
+    {{ dump(syntheseCommande) }}
 
 {% endblock %}

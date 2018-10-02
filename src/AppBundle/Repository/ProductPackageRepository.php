@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ProductPackageRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function searchOrderLineBy($agence)
+    {
+
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.user','u')
+            ->leftJoin('u.agence','a')
+            ->andWhere('a.name = :agence')
+            ->setParameter('agence',$agence);
+
+        return $qb->getQuery()->getResult();
+    }
 }

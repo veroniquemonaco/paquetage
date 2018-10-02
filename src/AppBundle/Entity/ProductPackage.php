@@ -62,6 +62,30 @@ class ProductPackage
     private $user;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="idpdtUnique", type="string")
+     */
+    private $idpdtUnique;
+
+    /**
+     * @return string
+     */
+    public function getIdpdtUnique()
+    {
+        return $this->idpdtUnique;
+    }
+
+    /**
+     * @param string $idpdtUnique
+     */
+    public function setIdpdtUnique($idpdtUnique)
+    {
+        $this->idpdtUnique = $this->getIdpdt().$this->getTaille();
+    }
+
+
+    /**
      * @return mixed
      */
     public function getUser()
