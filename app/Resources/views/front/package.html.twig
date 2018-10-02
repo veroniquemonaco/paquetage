@@ -125,6 +125,7 @@
                         data: {'lessProduct': lessProduct},
                         success: function (data) {
                             let lessPdtId = data['lessPdtId'];
+                            console.log(lessPdtId);
                             $('.idpdt-' + lessPdtId + '').html('');
                         }
                     })

@@ -58,13 +58,13 @@ class AdminController extends Controller
             }
             dump($test3);
 
-            for ($i=1; $i<count($test3)+1;$i++) {
-                if ($test3[$i]['idpdt'] == $test3[$i-1]['idpdt']) {
+            for ($i=1; $i<count($test3);$i++) {
+                if ($test3[$i]['idpdt'] === $test3[$i-1]['idpdt']) {
                     $test3[$i]['qte']=$test3[$i]['qte']+$test3[$i-1]['qte'];
                 }
             }
 
-
+            dump($test3);
         }
 
         return $this->render('admin/exports.html.twig', array(
@@ -99,6 +99,9 @@ class AdminController extends Controller
             $user->setEmail($email);
             $em->persist($user);
             $em->flush();
+
+            return $this->redirectToRoute('index_user');
+
         }
 
         return $this->render('admin/createuser.html.twig', array('form' => $form->createView()));

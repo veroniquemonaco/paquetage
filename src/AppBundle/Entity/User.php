@@ -93,6 +93,29 @@ class User implements UserInterface
     private $qualification;
 
     /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductPackage", mappedBy="user")
+     */
+    private $productsPackage;
+
+    /**
+     * @return mixed
+     */
+    public function getProductsPackage()
+    {
+        return $this->productsPackage;
+    }
+
+    /**
+     * @param mixed $productsPackage
+     */
+    public function setProductsPackage($productsPackage)
+    {
+        $this->productsPackage = $productsPackage;
+    }
+
+    /**
      * @return string
      */
     public function getFirstname()

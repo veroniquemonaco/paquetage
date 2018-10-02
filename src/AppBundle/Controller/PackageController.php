@@ -38,6 +38,7 @@ class PackageController extends Controller
 
         $session = new Session();
 
+
         if (!$session->has('panier')) $session->set('panier', []);
 
 
@@ -65,7 +66,7 @@ class PackageController extends Controller
                 $em->flush();
 
 //                $panier[$addProduct->getProduct()->getId()] = $addProduct;
-                $panier[] = $addProduct;
+                $panier[$productId] = $addProduct;
                 $session->set('panier', $panier);
 
 
@@ -79,6 +80,7 @@ class PackageController extends Controller
             } elseif ($lessData) {
 
                 $product = $em->getRepository(Product::class)->findOneBy(['id' => $lessData['idPdt']]);
+//                $addProduct = $em->getRepository(Addproduct::class)->findOneBy(['product' => $product]);
 
                 unset($panier[$product->getId()]);
                 $session->set('panier', $panier);

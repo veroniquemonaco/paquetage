@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\Addproduct;
+use AppBundle\Entity\ProductPackage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,13 +30,22 @@ class CommandeController extends Controller
             $array[$index]['qte'] = $addproduct->getQuantity();
             $array[$index]['taille'] = $addproduct->getTaille()->getName();
             $array[$index]['prix'] = $addproduct->getPrice();
+            $orderline = new ProductPackage();
+            $orderline->setUser($user);
+            $orderline->setIdpdt($addproduct->getProduct()->getId());
+            $orderline->setLibellePdt($addproduct->getProduct()->getName());
+            $orderline->setTaille($addproduct->getTaille()->getName());
+            $orderline->setQty($addproduct->getQuantity());
+            $orderline->setYearPaquetage(2018);
+            $em->persist($orderline);
+            $em->flush();
         }
         $commande = new Commande();
         $commande->setDate(new \DateTime());
         $commande->setUser($this->getUser());
         $commande->setValider(1);
         $commande->setCommande($array);
-        $commande->setReference(0);
+        $commande->setReference(4);
 
         $em->persist($commande);
         $em->flush();
