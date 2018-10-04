@@ -2,13 +2,14 @@
 
 {% block body %}
 
-    <div class="container container-bloc-home">
+    {#<div class="container container-bloc-home">#}
 
         <div class="package-front">
-            <h1 class="package--front--title">{{ user.firstname }} {{ user.lastname }}, il est temps de préparer votre
-                paquetage</h1>
-            <div class="">
-                <div class="container product--list">
+            {#<h1 class="package--front--title mb-4">{{ user.firstname }} {{ user.lastname }}, il est temps de préparer votre#}
+                {#paquetage</h1>#}
+            <div class="row">
+                <div class="container product--list col-6">
+                    <h4 class="p-2 mb-4 text-center">Sélection du paquetage</h4>
                     <div class="row">
                         <div class="col-1">#</div>
                         <div class="col-5">Libellé</div>
@@ -18,7 +19,7 @@
                     </div>
                     {% for produit in produits %}
                         <div class="row">
-                            <div class="col-1">#</div>
+                            <div class="col-1">{{ loop.index }}</div>
                             <div class="col-5 form-product" data-productid="{{ produit.id }}">{{ produit.name }}</div>
                             <div class="col-2 form-product-taille">
                                 <select class="custom-select">
@@ -40,30 +41,30 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="container product--select">
-                    <div class="row">
-                        <div id="panier" class="">
-                            <h6>Vous avez choisi ces vêtements</h6>
-                            <table class="table">
+                <div class="container product--select col-5">
+                    <h4 class="p-2 mb-4 text-center">Sélection de {{ user.firstname }} {{ user.lastname }}</h4>
+                    {#<div class="row">#}
+                        <div id="panier" class="w-100">
+                            <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Produit</th>
-                                    <th scope="col">Taille</th>
-                                    <th scope="col">Qté</th>
+                                <tr class="row">
+                                    <th class="col-1">#</th>
+                                    <th class="col-6">Produit</th>
+                                    <th class="col-2">Taille</th>
+                                    <th class="col-2">Qté</th>
                                 </tr>
                                 </thead>
                                 <tbody class="panier--product">
                                 </tbody>
                             </table>
                             <div class="clearfix"></div>
-                            <a href="{{ path('panier') }}" class="btn btn-success pull-right">Valider</a>
+                            <a href="{{ path('panier') }}" class="btn btn-success float-right">Valider</a>
                         </div>
-                    </div>
+                    {#</div>#}
                 </div>
             </div>
         </div>
-    </div>
+    {#</div>#}
 {% endblock %}
 
 {% block javascripts %}
@@ -100,10 +101,11 @@
                             let tailleCart = data['addPdtTaille'];
                             let libellePdtCart = data['addPdtLibelle'].replace(/"/g, "");
                             let libelleTailleCart = data['addPdtTailleLibelle'].replace(/"/g, "");
-                            $('.panier--product').append("<tr class=idpdt-" + idPdtCart + "><th scope=\"row\">2</th>" +
-                                "<td>" + libellePdtCart + "</td>" +
-                                "<td>" + libelleTailleCart + "</td>" +
-                                "<td>" + qtyCart + "</td>\n" +
+                            $('.panier--product').append("<tr class=\"row\">" +
+                                "<td class=\"col-1\">" + idPdtCart +"</td>" +
+                                "<td class=\"col-6\">" + libellePdtCart + "</td>" +
+                                "<td class=\"col-2\">" + libelleTailleCart + "</td>" +
+                                "<td class=\"col-2\">" + qtyCart + "</td>\n" +
                                 "</tr>");
                         }
                     })

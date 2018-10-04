@@ -5,21 +5,11 @@
 
 {% block body %}
 
-<h5>panier</h5>
-
-    {{ dump(panier) }}
-
-    <div class="container container-bloc-home">
-
-        <div class="package-front">
-
-
-            <h1>Voilà ce que vous avez choisi</h1>
-
+        <div class="container package-front--panier">
 
             <div id="panier">
-                <h6>Vous avez choisi ces vêtements</h6>
-                <table class="table">
+                <h4 class="text-center mb-4">Votre paquetage</h4>
+                <table class="table table-striped w-75">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -48,12 +38,10 @@
                     {{ totalHT }}
                 </div>
 
-                <div class="clearfix"></div>
-                <a href="{{ path('commande', { 'panier': panier }) }}" class="btn btn-success pull-right">Valider</a>
+                {#<div class="clearfix"></div>#}
+                <a href="{{ path('commande', { 'panier': panier }) }}" class="btn btn-success float-right">Valider</a>
             </div>
 
         </div>
-
-    </div>
 
 {% endblock %}
